@@ -11,8 +11,8 @@ const normalize = (vector, len = 1.0) => {
 
 const spiralGenerator = (i) => {
   const angle = 0.5 * i;
-  const x = (250) + (i + (50) * angle) * Math.cos(angle);
-  const y = (250) + (i + (50) * angle) * Math.sin(angle);
+  const x = 100 * angle;
+  const y = 100/3 * angle;
   return ({ x, y });
 };
 
@@ -29,7 +29,7 @@ export const generateCircles = (keywordData, center, scale, largestAtCenter) => 
   const circles = sortedKeywords.map((keyword, index, arr) => ({
     center,
     size: (keyword.frequency / (sum)) * scale,
-    color: "transparent",
+    color: keyword.color,
     label: keyword.keyword,
     ...spiralGenerator(index),
   }));
@@ -105,13 +105,13 @@ export const drawCirclesOnCanvas = (circles, canvas, drawContainerCircle, contai
     ctx.arc(circle.x, circle.y, circle.size , 0, Math.PI * 2, true);
     ctx.clearRect(0, 0, canvas.x, canvas.y);
     ctx.closePath();
-    ctx.fillStyle = circle.color;
+    ctx.fillStyle = 'transparent';
     ctx.lineWidth = 0;
     ctx.fill();
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = `lighter ${Math.floor(circle.size / 4)}px sans-serif`;
-    ctx.fillStyle = '#000000';
+    ctx.font = `bolder ${Math.floor(circle.size / 4)}px sans-serif`;
+    ctx.fillStyle = circle.color;
     ctx.fillText(circle.label, circle.x, circle.y);
   });
 };
