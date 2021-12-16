@@ -105,8 +105,8 @@ export const drawCirclesOnCanvas = (circles, canvas, drawContainerCircle, contai
   circles.forEach(circle => {
     ctx.beginPath();
     ctx.clearRect(0, 0, canvas.x, canvas.y);
-    ctx.rotate(angle);
     ctx.closePath();
+    ctx.rotate(angle * Math.PI / 180);
     ctx.fillStyle = 'rgba(38, 69, 49, 0.4)';
     ctx.lineWidth = 0;
     ctx.fill();
