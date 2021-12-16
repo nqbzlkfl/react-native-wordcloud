@@ -92,6 +92,8 @@ export const calcPositions = (circles) => {
 
 export const drawCirclesOnCanvas = (circles, canvas, drawContainerCircle, containerCircleColor) => {
   const containerColor = containerCircleColor || 'transparent';
+  const random = Math.floor(Math.random() * 2);
+  const angle = random == 0 ? 0 : 90;
   const ctx = canvas.getContext('2d');
   if(drawContainerCircle){
   ctx.beginPath();
@@ -103,8 +105,9 @@ export const drawCirclesOnCanvas = (circles, canvas, drawContainerCircle, contai
   circles.forEach(circle => {
     ctx.beginPath();
     ctx.clearRect(0, 0, canvas.x, canvas.y);
+    ctx.rotate(angle);
     ctx.closePath();
-    ctx.fillStyle = 'transparent';
+    ctx.fillStyle = 'rgba(38, 69, 49, 0.4)';
     ctx.lineWidth = 0;
     ctx.fill();
     ctx.textAlign = 'center';
