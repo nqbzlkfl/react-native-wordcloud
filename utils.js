@@ -102,7 +102,6 @@ export const drawCirclesOnCanvas = (circles, canvas, drawContainerCircle, contai
   ctx.closePath();
   circles.forEach(circle => {
     ctx.beginPath();
-    ctx.arc(circle.x, circle.y, circle.size , 0, Math.PI * 2, true);
     ctx.clearRect(0, 0, canvas.x, canvas.y);
     ctx.closePath();
     ctx.fillStyle = 'transparent';
@@ -110,7 +109,7 @@ export const drawCirclesOnCanvas = (circles, canvas, drawContainerCircle, contai
     ctx.fill();
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = `bolder ${Math.floor(circle.size / 4)}px sans-serif`;
+    ctx.font = `bolder ${Math.floor(circle.size / 2)}px sans-serif`;
     ctx.fillStyle = circle.color;
     ctx.fillText(circle.label, circle.x, circle.y);
   });
