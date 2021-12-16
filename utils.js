@@ -29,7 +29,7 @@ export const generateCircles = (keywordData, center, scale, largestAtCenter) => 
   const circles = sortedKeywords.map((keyword, index, arr) => ({
     center,
     size: (keyword.frequency / (sum)) * scale,
-    color: keyword.color,
+    color: "transparent",
     label: keyword.keyword,
     ...spiralGenerator(index),
   }));
@@ -91,17 +91,19 @@ export const calcPositions = (circles) => {
 };
 
 export const drawCirclesOnCanvas = (circles, canvas, drawContainerCircle, containerCircleColor) => {
+  const containerColor = containerCircleColor || 'transparent';
   const ctx = canvas.getContext('2d');
   if(drawContainerCircle){
   ctx.beginPath();
-  ctx.arc(canvas.width / 2, canvas.height / 2, (canvas.width / 2) - 5, 0, Math.PI * 2, true);
-  ctx.fillStyle = containerCircleColor;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = containerColor;
   ctx.fill();
   }
   ctx.closePath();
   circles.forEach(circle => {
     ctx.beginPath();
     ctx.arc(circle.x, circle.y, circle.size , 0, Math.PI * 2, true);
+    ctx.clearRect(0, 0, canvas.x, canvas.y);
     ctx.closePath();
     ctx.fillStyle = circle.color;
     ctx.lineWidth = 0;
